@@ -13,7 +13,7 @@ This package interacts wwell, but does not depend on, mauricek/psr-authorization
 ### Installing
 
 ```
-composer install mauricek\psr-authorization
+composer install mauricek\psr-authentication
 ```
 
 ## Running the tests
