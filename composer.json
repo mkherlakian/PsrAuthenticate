@@ -1,0 +1,31 @@
+{
+    "name": "mauricek/psr-authentication",
+    "description": "A PSR-7 compatible package to handle authentication. Includes user registration, email verification, sms verification, 2FA and a configurable flow. Implemented with JWT support only at the moment (success generates a JWT token)",
+    "type": "library",
+    "license": "New BSD License",
+    "authors": [
+        {
+            "name": "mkherlakian",
+            "email": "1141190+mkherlakian@users.noreply.github.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Mauricek\\PsrAuthentication\\": "src/"
+        }
+    },
+    "require": {
+        "ramsey/uuid": "^3.8",
+        "beberlei/assert": "^3.2",
+        "marc-mabe/php-enum": "^3.1",
+        "phly/phly-expressive-configfactory": "^1.1",
+        "lcobucci/jwt": "^3.2",
+        "psr/http-message": "^1.0",
+        "psr/http-server-middleware": "^1.0",
+        "zendframework/zend-servicemanager": "^3.4",
+        "zendframework/zend-diactoros": "^2.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5"
+    }
+}
