@@ -123,7 +123,6 @@ class Authenticate
         }
 
         //Token is valid - issue new jwt
-//        $role = $tokenData['role'];
         $member = $this
             ->memberAdapter
             ->retrieveMemberById($tokenData['id']);
@@ -136,47 +135,6 @@ class Authenticate
         );
 
     }
-
-//    public function parseToken($token)
-//    {
-//        $token = $this->tokenParser->parse($token);
-//        return $token;
-//    }
-
-//    public function validate(string $tokenString, ?DateTimeInterface $now = null)
-//    {
-//        $token = $this->tokenParser->parse($tokenString);
-//
-//        $this->tokenValidator->setIssuer($this->jwtParams['iss']);
-//        $this->tokenValidator->setAudience($this->jwtParams['aud']);
-//
-//        try {
-//            $signatureTest = $token->verify($this->tokenSigner, $this->jwtParams['signing_key']);
-//        } catch(\BadMethodCallException $e) {
-//            return new AuthResult(false, null, AuthFailReason::VERIFICATION_FAILED_SIGNATURE());
-//        }
-//
-//        if(!$signatureTest) {
-//            return new AuthResult(false, null, AuthFailReason::VERIFICATION_FAILED_SIGNATURE());
-//        }
-//
-//        //expired?
-//        if($token->isExpired($now)) {
-//            return new AuthResult(false, null, AuthFailReason::VERIFICATION_FAILED_EXPIRED());
-//        }
-//
-//        $tokenDataTest = $token->validate($this->tokenValidator);
-//        if(!$tokenDataTest) {
-//            return new AuthResult(false, null, AuthFailReason::VERIFICATION_FAILED_DATA());
-//        }
-//
-//        //Blacklisted?
-//        if($this->authStore->isTokenBlacklisted($token->getClaim('jti'))) {
-//            return new AuthResult(false, null, AuthFailReason::VERIFICATION_FAILED_JTI());
-//        }
-//
-//        return new AuthResult(true);
-//    }
 
     public function blacklistToken(TokenJti $jti, TokenExp $exp) : void
     {

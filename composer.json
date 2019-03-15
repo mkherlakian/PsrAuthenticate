@@ -23,7 +23,12 @@
         "psr/http-message": "^1.0",
         "psr/http-server-middleware": "^1.0",
         "zendframework/zend-servicemanager": "^3.4",
-        "zendframework/zend-diactoros": "^2.1"
+        "zendframework/zend-diactoros": "^2.1",
+        "mongodb/mongodb": "^1.4"
+    },
+    "suggest": {
+        "mongodb/mongodb": "*",
+        "doctrine/dbal": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.5"

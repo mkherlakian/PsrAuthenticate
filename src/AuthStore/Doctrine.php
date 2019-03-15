@@ -11,9 +11,9 @@ use Assert\Assertion;
 final class Doctrine implements AuthStore
 {
     //expire should be determined by config and injected here
-    const REFRESH_TOKEN_TABLE   = 'refresh_token';
-    const TOKEN_BLACKLIST_TABLE = 'blacklist_token';
-    const VERIFICATION_TOKEN_TABLE = 'verification_token';
+    const REFRESH_TOKEN_TABLE       = 'refresh_token';
+    const TOKEN_BLACKLIST_TABLE     = 'blacklist_token';
+    const VERIFICATION_TOKEN_TABLE  = 'verification_token';
 
     private $connection;
     private $expireTime;
@@ -22,6 +22,10 @@ final class Doctrine implements AuthStore
     {
         $this->connection = $connection;
         $this->expireTime = $expireTime;
+    }
+
+    protected function getExpireTime() : int {
+        return $this->expireTime;
     }
 
     public function createTables()

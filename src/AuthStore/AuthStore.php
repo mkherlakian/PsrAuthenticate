@@ -6,6 +6,7 @@ namespace Mauricek\PsrAuthentication\AuthStore;
 
 interface AuthStore
 {
+    public function getExpireTime() : int;
     public function fetchRefreshTokenById(string $id, bool $fetchExpired = false) : ?array;
     public function fetchRefreshTokenByToken(string $token, bool $fetchExpired = false) : ?array;
     public function createRefreshToken(string $id, string $token, string $role) : void;

@@ -39,8 +39,6 @@ class ConfigProvider
                 RoleCalculator\RoleCalculator::class                => RoleCalculator\DefaultRoleCalculator::class,
             ],
             'factories' => [
-                'AuthenticatedPipeline'                             => Pipelines\AuthenticatedPipelineFactory::class,
-                Authenticate::class                                 => AuthenticateFactory::class,
                 Middleware\TokenEmitterHandler::class               => ConfigAbstractFactory::class,
                 Middleware\BlacklistTokenOnWriteMiddleware::class   => ConfigAbstractFactory::class,
                 Middleware\ValidateTokenMiddleware::class           => ConfigAbstractFactory::class,
@@ -123,21 +121,18 @@ class ConfigProvider
     public function registerRoutes(Application $app, string $basePath = '/api/auth')
     {
         $app->route("$basePath/login", [
-            'AuthorizationMiddleware',
             Middleware\LoginMiddleware::class,
             Middleware\RoleCalculatorMiddleware::class,
             Middleware\TokenEmitterHandler::class,
         ], null, 'api.auth.login');
 
         $app->route("$basePath/refresh", [
-            'AuthorizationMiddleware',
             Middleware\RefreshTokenMiddleware::class,
             Middleware\TokenEmitterHandler::class,
         ], null, 'api.auth.refresh');
 
         $app->route("$basePath/logout", [
             Middleware\ValidateTokenMiddleware::class,
-            'AuthorizationMiddleware',
             Middleware\BlacklistTokenOnWriteMiddleware::class,
             Middleware\LogoutHandler::class,
         ], null, 'api.auth.logout');
