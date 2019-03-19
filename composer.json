@@ -2,7 +2,7 @@
     "name": "mauricek/psr-authentication",
     "description": "A PSR-7 compatible package to handle authentication. Includes user registration, email verification, sms verification, 2FA and a configurable flow. Implemented with JWT support only at the moment (success generates a JWT token)",
     "type": "library",
-    "license": "New BSD License",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "mkherlakian",
