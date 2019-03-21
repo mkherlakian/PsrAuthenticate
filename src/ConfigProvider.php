@@ -27,7 +27,6 @@ class ConfigProvider
     {
         return [
             'invokables' => [
-                AuthorizationMiddleware::class                      => AuthorizationMiddleware::class,
                 Parser::class                                       => Parser::class,
                 ValidationData::class                               => ValidationData::class,
                 LoginValidator::class                               => LoginValidator::class,
@@ -46,6 +45,7 @@ class ConfigProvider
                 Middleware\RefreshTokenMiddleware::class            => ConfigAbstractFactory::class,
                 Middleware\LogoutHandler::class                     => ConfigAbstractFactory::class,
                 Middleware\RoleCalculatorMiddleware::class          => ConfigAbstractFactory::class,
+                AuthProvider\JwtValidationProvider::class           => ConfigAbstractFactory::class,
                 'config-jwt_params'                                 => ExpressiveConfigFactory::class,
                 'config-security'                                   => ExpressiveConfigFactory::class,
                 JwtBuilderPluginManager::class                      =>
@@ -77,15 +77,15 @@ class ConfigProvider
                 CanHashPassword::class,
                 AuthStore\AuthStore::class,
             ],
-            Middleware\TokenEmitterHandler::class => [
-                JwtBuilderPluginManager::class,
+            AuthProvider\JwtValidationProvider::class => [
+                AuthStore\AuthStore::class,
                 Parser::class,
                 Signer::class,
                 ValidationData::class,
                 'config-jwt_params'
             ],
-            Middleware\ValidateTokenMiddleware::class => [
-                AuthStore\AuthStore::class,
+            Middleware\TokenEmitterHandler::class => [
+                JwtBuilderPluginManager::class,
                 Parser::class,
                 Signer::class,
                 ValidationData::class,
@@ -100,6 +100,9 @@ class ConfigProvider
             ],
             Middleware\LogoutHandler::class => [
                 Authenticate::class,
+            ],
+            Middleware\ValidateTtokenMiddleware::class => [
+                AuthProvider\JwtValidationProvider::class
             ],
             Middleware\BlacklistTokenOnWriteMiddleware::class => [
                 Authenticate::class,

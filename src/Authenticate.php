@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Mauricek\PsrAuthentication;
 
-use Lcobucci\JWT\Builder;
-use Lcobucci\JWT\Signer;
-use Lcobucci\JWT\ValidationData;
-use Lcobucci\JWT\Parser;
 use Ramsey\Uuid\Uuid;
 use Assert\Assertion;
 use DateTimeInterface;
@@ -63,7 +59,7 @@ class Authenticate
                                          //that doesn't chnage, we set it to avoid injecting another dependency.
 
         //If we're here, the user is successfully authenticated -
-        //if they already have a valid refresh token, pass it along with the JWT.
+        //if they already have a valid refresh token, pass it along.
         //Otherwise create a new refresh token.
         $refreshToken = $this->loadOrGenerateRefreshToken($member, $role);
 
@@ -122,7 +118,7 @@ class Authenticate
             return new AuthResult(false, null, null, AuthFailReason::REFRESH_TOKEN_EXPIRED());
         }
 
-        //Token is valid - issue new jwt
+        //Token is valid - issue valid AuthResult
         $member = $this
             ->memberAdapter
             ->retrieveMemberById($tokenData['id']);
