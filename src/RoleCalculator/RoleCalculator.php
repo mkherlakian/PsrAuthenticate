@@ -12,5 +12,5 @@ interface RoleCalculator
         HasMemberAttributes $member,
         ?string $currentRole = null,
         string $browserFingerprint = null
-    );
+    ) : string;
 }

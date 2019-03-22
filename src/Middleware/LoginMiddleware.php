@@ -12,6 +12,7 @@ use Mauricek\PsrAuthentication\Authenticate;
 use Mauricek\PsrAuthentication\Credentials;
 use Mauricek\PsrAuthentication\AuthResult;
 use Mauricek\PsrAuthentication\LoginValidator;
+use Mauricek\PsrAuthentication\Exception;
 
 class LoginMiddleware implements MiddlewareInterface
 {
@@ -42,7 +43,8 @@ class LoginMiddleware implements MiddlewareInterface
 
         if(!$valid)
         {
-            throw new InvalidArgumentException('Validation', null, $e);
+            $messages = implode(', ', $this->validator->getMessages());
+            throw new Exception\InvalidArgumentException("Validation - $messages");
         }
 
         $ip             = $request->getServerParams()['REMOTE_ADDR'];
@@ -55,7 +57,7 @@ class LoginMiddleware implements MiddlewareInterface
 
         if(!$authResult->success())
         {
-            throw new RuntimeException('Unauthtorized login attempt -'.$authResult->reason());
+            throw new Exception\RuntimeException('Unauthtorized login attempt - '.$authResult->reason());
         }
 
         $credentials = new Credentials(

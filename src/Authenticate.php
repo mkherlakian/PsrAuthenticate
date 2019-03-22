@@ -82,7 +82,7 @@ class Authenticate
             $refreshToken = $this->generateRefreshToken();
             $this->authStore->createRefreshToken($member->id(), $refreshToken, $role);
         } else {
-            $refreshToken = $tokenData[0]['token'];
+            $refreshToken = $tokenData['token'];
         }
 
         return $refreshToken;
@@ -112,7 +112,7 @@ class Authenticate
             return new AuthResult(false, null, null, AuthFailReason::INVALID_REFRESH_TOKEN());
         }
 
-        $tokenData = $tokenData[0];
+//        $tokenData = $tokenData[0];
         if($tokenData['is_expired'] !== '0')
         {
             return new AuthResult(false, null, null, AuthFailReason::REFRESH_TOKEN_EXPIRED());

@@ -38,6 +38,7 @@ class ConfigProvider
                 RoleCalculator\RoleCalculator::class                => RoleCalculator\DefaultRoleCalculator::class,
             ],
             'factories' => [
+                Authenticate::class                                 => ConfigAbstractFactory::class,
                 Middleware\TokenEmitterHandler::class               => ConfigAbstractFactory::class,
                 Middleware\BlacklistTokenOnWriteMiddleware::class   => ConfigAbstractFactory::class,
                 Middleware\ValidateTokenMiddleware::class           => ConfigAbstractFactory::class,
@@ -101,7 +102,7 @@ class ConfigProvider
             Middleware\LogoutHandler::class => [
                 Authenticate::class,
             ],
-            Middleware\ValidateTtokenMiddleware::class => [
+            Middleware\ValidatetokenMiddleware::class => [
                 AuthProvider\JwtValidationProvider::class
             ],
             Middleware\BlacklistTokenOnWriteMiddleware::class => [

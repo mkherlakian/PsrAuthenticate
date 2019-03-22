@@ -42,4 +42,9 @@ class LoginValidator
 
         return $success;
     }
+
+    public function getMessages()
+    {
+        return $this->messages;
+    }
 }

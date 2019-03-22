@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mauricek\PsrAuthentication\MemberAdapter;
 
+/**
+ * Unused at the moment, keep for future possible use
+ */
 interface CanCreateMember
 {
     public function createMember(

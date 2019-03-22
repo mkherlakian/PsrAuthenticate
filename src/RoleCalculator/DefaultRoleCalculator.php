@@ -13,7 +13,7 @@ class DefaultRoleCalculator implements RoleCalculator
         ?string $currentRole = null,
         string $browserFingerprint = null //,
 //        array $knownMemberFingerprints
-    ) {
+    ) : string {
         if(is_null($currentRole) || $currentRole == 'anonymous')  {
             return 'auth_0';
         }
