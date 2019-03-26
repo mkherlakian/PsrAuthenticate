@@ -128,17 +128,17 @@ class ConfigProvider
             Middleware\LoginMiddleware::class,
             Middleware\RoleCalculatorMiddleware::class,
             Middleware\TokenEmitterHandler::class,
-        ], null, 'api.auth.login');
+        ], ['POST'], 'api.auth.login');
 
         $app->route("$basePath/refresh", [
             Middleware\RefreshTokenMiddleware::class,
             Middleware\TokenEmitterHandler::class,
-        ], null, 'api.auth.refresh');
+        ], ['POST'], 'api.auth.refresh');
 
         $app->route("$basePath/logout", [
             Middleware\ValidateTokenMiddleware::class,
             Middleware\BlacklistTokenOnWriteMiddleware::class,
             Middleware\LogoutHandler::class,
-        ], null, 'api.auth.logout');
+        ], ['POST'], 'api.auth.logout');
     }
 }
