@@ -38,7 +38,7 @@ class BlacklistTokenOnWriteMiddleware implements MiddlewareInterface
 
         //If request is write (POST, PUT, DELETE), and reponse is 200,
         //blacklist token - helps prevent replay attacks
-        if(in_array($request->getMethod(), ['POST', 'PUT', 'DELETE'])
+        if(in_array($request->getMethod(), ['POST', 'PUT', 'DELETE', 'PATCH'])
             && $response->getStatusCode() == 200
             && $this->blacklistTokenAfterWrite
         ) {

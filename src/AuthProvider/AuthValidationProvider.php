@@ -8,4 +8,5 @@ use Mauricek\PsrAuthentication\Credentials;
 interface AuthValidationProvider
 {
     public function validate(ServerRequestInterface $request) : ?Credentials;
+    public function additionalParameters() : array;
 }

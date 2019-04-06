@@ -28,6 +28,8 @@ class JwtValidationProvider implements AuthValidationProvider
     protected $tokenValidator;
     protected $jwtParams;
     protected $authStore;
+    protected $jti;
+    protected $exp;
 
     public function  __construct(
         AuthStore $authStore,
@@ -73,6 +75,9 @@ class JwtValidationProvider implements AuthValidationProvider
             $jwtParsed->getClaim('role')
         );
 
+        $this->jti = new TokenJti($jwtParsed->getClaim('jti'));
+        $this->exp = new TokenExp($jwtParsed->getClaim('exp'));
+
         return $credentials;
     }
 
@@ -109,6 +114,14 @@ class JwtValidationProvider implements AuthValidationProvider
         }
 
         return true;
+    }
+
+    public function additionalParameters() : array
+    {
+        return [
+            TokenJti::class => $this->jti,
+            TokenExp::class => $this->exp,
+        ];
     }
 
     protected function throwUnauthorizedRequest(string $reason)

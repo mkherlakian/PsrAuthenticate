@@ -41,6 +41,13 @@ class ValidateTokenMiddleware implements MiddlewareInterface
         $request = $request
             ->withAttribute(Credentials::class, $credentials);
 
+        $additional = $this->validationProvider->additionalParameters();
+        if(count($additional) > 0) {
+            foreach($additional as $k => $v) {
+                $request = $request->withAttribute($k, $v);
+            }
+        }
+
         $response = $delegate->handle($request);
 
         return $response;

@@ -102,7 +102,7 @@ class ConfigProvider
             Middleware\LogoutHandler::class => [
                 Authenticate::class,
             ],
-            Middleware\ValidatetokenMiddleware::class => [
+            Middleware\ValidateTokenMiddleware::class => [
                 AuthProvider\JwtValidationProvider::class
             ],
             Middleware\BlacklistTokenOnWriteMiddleware::class => [
