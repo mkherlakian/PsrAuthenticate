@@ -46,6 +46,7 @@ class ConfigProvider
                 Middleware\RefreshTokenMiddleware::class            => ConfigAbstractFactory::class,
                 Middleware\LogoutHandler::class                     => ConfigAbstractFactory::class,
                 Middleware\RoleCalculatorMiddleware::class          => ConfigAbstractFactory::class,
+                Middleware\RefreshTokenUpdateMiddleware::class      => ConfigAbstractFactory::class,
                 AuthProvider\JwtValidationProvider::class           => ConfigAbstractFactory::class,
                 'config-jwt_params'                                 => ExpressiveConfigFactory::class,
                 'config-security'                                   => ExpressiveConfigFactory::class,
@@ -113,6 +114,9 @@ class ConfigProvider
                 RoleCalculator\RoleCalculator::class,
                 MemberAdapter\CanRetrieveMember::class
             ],
+            Middleware\RefreshTokenUpdateMiddleware::class => [
+                AuthStore\AuthStore::class,
+            ],
             Verify\Strategy\Email::class => [
                 Verify\Sender\CanSendEmail::class
             ],
@@ -127,6 +131,7 @@ class ConfigProvider
         $app->route("$basePath/login", [
             Middleware\LoginMiddleware::class,
             Middleware\RoleCalculatorMiddleware::class,
+            Middleware\RefreshTokenUpdateMiddleware::class,
             Middleware\TokenEmitterHandler::class,
         ], ['POST'], 'api.auth.login');
 
