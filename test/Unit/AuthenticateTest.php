@@ -43,9 +43,9 @@ class AuthenticateTest extends TestCase
         $authStore = $this->prophesize();
         $authStore->willImplement(AuthStore::class);
 
-        $authStore->fetchRefreshTokenById((string)$this->activeUuid)->willReturn([
+        $authStore->fetchRefreshTokenById((string)$this->activeUuid)->willReturn(
             ['token' => (string)Uuid::uuid4()]
-        ]);
+        );
         $authStore->createRefreshToken((string)$this->activeUuid, Argument::any(), 'auth_0')->shouldBeCalledTimes(0);
         $authStore->deleteExpiredTokens((string)$this->activeUuid)->shouldBeCalledTimes(1);
 

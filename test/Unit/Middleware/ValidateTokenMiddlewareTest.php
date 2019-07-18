@@ -3,11 +3,11 @@
 use PHPUnit\Framework\TestCase;
 use Mauricek\PsrAuthentication\AuthStore\AuthStore;
 use Mauricek\PsrAuthentication\AuthProvider\AuthValidationProvider;
+use Mauricek\PsrAuthentication\AuthProvider\JwtValidationProvider;
 use Mauricek\PsrAuthentication\Middleware\ValidateTokenMiddleware;
 use Mauricek\PsrAuthentication\Credentials;
 use Mauricek\PsrAuthentication\TokenJti;
 use Mauricek\PsrAuthentication\TokenExp;
-use Mauricek\PsrAuthentication\AuthProvider\JwtValidationProvider;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -18,10 +18,14 @@ class ValidateTokenMiddlewareTest extends TestCase
 {
     protected function getValidationProvider($success = true)
     {
-        $provider = $this->prophesize(JwtValidationProvider::class);
+        $provider = $this->prophesize(AuthValidationProvider::class);
         $provider->validate(Argument::type(ServerRequestInterface::class))->willReturn(
             $success ? new Credentials('member_id', 'username', 'member') : null
         );
+
+        if($success) {
+            $provider->additionalParameters()->willReturn(['param1' => 'value1']);
+        }
 
         return $provider->reveal();
     }
@@ -32,6 +36,10 @@ class ValidateTokenMiddlewareTest extends TestCase
 
         $request
             ->withAttribute(Credentials::class, Argument::type(Credentials::class))
+            ->willReturn($request);
+
+        $request
+            ->withAttribute('param1', 'value1')
             ->willReturn($request);
 
         return $request->reveal();

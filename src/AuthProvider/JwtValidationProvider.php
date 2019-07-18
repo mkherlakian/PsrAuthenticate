@@ -116,6 +116,9 @@ class JwtValidationProvider implements AuthValidationProvider
         return true;
     }
 
+    /**
+     * Additional parameters that we want the request to carry forward
+     */
     public function additionalParameters() : array
     {
         return [

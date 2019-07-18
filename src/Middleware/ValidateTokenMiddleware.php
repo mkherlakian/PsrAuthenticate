@@ -9,7 +9,7 @@ use Mauricek\PsrAuthentication\TokenJti;
 use Mauricek\PsrAuthentication\TokenExp;
 use Mauricek\PsrAuthentication\Exception\InvalidArgumentException;
 use Mauricek\PsrAuthentication\Exception\RuntimeException;
-use Mauricek\PsrAuthentication\AuthProvider\JwtValidationProvider;
+use Mauricek\PsrAuthentication\AuthProvider\AuthValidationProvider;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -23,7 +23,7 @@ class ValidateTokenMiddleware implements MiddlewareInterface
     protected $validationProvider;
 
     public function  __construct(
-        JwtValidationProvider $validationProvider
+        AuthValidationProvider $validationProvider
     ) {
         $this->validationProvider   = $validationProvider;
     }
